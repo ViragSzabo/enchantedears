@@ -40,7 +40,7 @@ EnchantedEars was founded in 2024 by Virag Szabo for educational purposes and he
 ### 2 Assignments
 #### 2.1 Use Case 
 Develop the following use case into an Entity Relationship Diagram showing all entities, relationships, attributes and keys. Bear in mind that cardinality and optionality must be included. Make sure that the diagram covers the entire use case and consider making several components generic so that the system can easily be expanded.
-[The UML Diagram](Diagrams/umlv2.png)
+![The UML Diagram](Diagrams/umlv2.png)
 
 ##### 2.1.1 Entities
 **Song:** It has a songID, a title, an artist, a genre, a release date, duration, an album and a playlist.
