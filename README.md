@@ -131,7 +131,7 @@ Next, generate a report in PDF format. This is not an official document and DOES
 *Time can be changed here.*
 | Date | Document |
 | --- | --- |
-| February 4 | [Use Case](Documents/Enchanted Ears_ Use Case.pdf) |
+| February 4 | [Use Case](Documents/UseCase.pdf) |
 | February 5 | [DBMS](Documents/DBMS.pdf) |
 | February 6 | [SQL](Documents/SQL.pdf) |
 | February 7 | [Database Integrity](Documents/DBIntegrity.pdf) |
