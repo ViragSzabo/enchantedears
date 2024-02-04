@@ -31,7 +31,8 @@
       - [2.6.3 MongoDB](#263-mongodb)
          - [2.6.3.1 Example](#2631-example)
       - [2.6.4 Report](#264-report)
-3. [3 Additional Information](#3-additional-information)
+3. [3 TimeTable](#3-timetable)
+4. [4 Additional Information](#4-additional-information)
 
 ### 1 Background
 EnchantedEars was founded in 2024 by Virag Szabo for educational purposes and her improvement in the Netherlands (Haarlem). She wanted to create something unique besides Netflix or Spotify and something that is not too complicated to build, but hard enough to create. The student is going to work hard in the upcoming weeks on this final assignment, following the steps from the subject. This student needs to make a positive contribution to the implementation of this music streaming system.
@@ -126,5 +127,14 @@ Select the “subscription” entity for the speed test, in which case you also 
 ###### 2.6.4 Report 
 Next, generate a report in PDF format. This is not an official document and DOES NOT need to contain a cover page, table of contents, etc. Presents the speeds in a matrix (table) and graphs. For each comparison an accompanying explanatory text to explain results that are worthy of note. Description of measures taken to demonstrate that the information is reliable, along with, at any rate, a description of the specifications of the device on which the tests were run.
 
-### 3 Additional Information
+### 3 TimeTable
+*Time can be changed here.*
+February 4: [Use Case](Documents/Enchanted Ears_ Use Case.pdf)
+February 5: [DBMS](Documents/Enchanted Ears_ DBMS.pdf)
+February 6: [SQL](Documents/Enchanted Ears_ SQL.pdf)
+February 7: [Database Integrity](Documents/Enchanted Ears_ Database Integrity.pdf)
+February 8: [Database Recovery](Documents/Enchanted Ears_ Database Recovery.pdf)
+February 9: [Final Assignment](Documents/Enchanted Ears_ Final Assignment.pdf)
+
+### 4 Additional Information
 Virag Szabo | BS | Information Technology | February 2024
