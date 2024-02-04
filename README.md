@@ -2,8 +2,8 @@
 ## NHL Stenden | Final Assignment | Database 2
 
 ### Table of Content
-[1 Background](#1-background)
-[2 Assignments](#2-assignments)
+- [1 Background](#1-background)
+- [2 Assignments](#2-assignments)
    - [2.1 Use Case](#21-use-case)
       - [2.1.1 Entities](#211-entities)
       - [2.1.2 Users](#212-users)
@@ -31,8 +31,8 @@
       - [2.6.3 MongoDB](#263-mongodb)
          - [2.6.3.1 Example](#2631-example)
       - [2.6.4 Report](#264-report)
-[3 TimeTable](#3-timetable)
-[4 Additional Information](#4-additional-information)
+- [3 TimeTable](#3-timetable)
+- [4 Additional Information](#4-additional-information)
 
 ### 1 Background
 EnchantedEars was founded in 2024 by Virag Szabo for educational purposes and her improvement in the Netherlands (Haarlem). She wanted to create something unique besides Netflix or Spotify and something that is not too complicated to build, but hard enough to create. The student is going to work hard in the upcoming weeks on this final assignment, following the steps from the subject. This student needs to make a positive contribution to the implementation of this music streaming system.
