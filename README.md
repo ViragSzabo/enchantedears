@@ -129,12 +129,14 @@ Next, generate a report in PDF format. This is not an official document and DOES
 
 ### 3 TimeTable
 *Time can be changed here.*
-February 4: [Use Case](Documents/Enchanted Ears_ Use Case.pdf)
-February 5: [DBMS](Documents/DBMS.pdf)
-February 6: [SQL](Documents/SQL.pdf)
-February 7: [Database Integrity](Documents/DBIntegrity.pdf)
-February 8: [Database Recovery](Documents/DBRecovery.pdf)
-February 9: [Final Assignment](Documents/FinalAssignment.pdf)
+| Date | Document |
+| --- | --- |
+| February 4 | [Use Case](Documents/Enchanted Ears_ Use Case.pdf) |
+| February 5 | [DBMS](Documents/DBMS.pdf) |
+| February 6 | [SQL](Documents/SQL.pdf) |
+| February 7 | [Database Integrity](Documents/DBIntegrity.pdf) |
+| February 8 | [Database Recovery](Documents/DBRecovery.pdf) |
+| February 9 | [Final Assignment](Documents/FinalAssignment.pdf) |
 
 ### 4 Additional Information
 Virag Szabo | BS | Information Technology | February 2024
