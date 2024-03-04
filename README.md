@@ -71,6 +71,8 @@ Install Microsoft SQL Server as a database provider and Microsoft Management Stu
 ##### 2.2.1 Create a database
 Create the database from Assignment 1 using DDL queries. You do not have to create the queries manually, but they must be delivered as an SQL file. Deliver the DDL queries in a .sql file with the file name: week2-1.sql. It is not (yet) necessary to add test data.
 
+![Users and roles](Screenshots/week2-1.png/)
+
 ##### 2.2.2 Users and Roles
 The data analysts at EnchantedEars are interested in the information that the data in the database provides, but they need to have access. Add the following users along with their corresponding roles and rights. Deliver the DDL queries in a .sql file with the file name: week2-2.sql.
 
@@ -82,6 +84,10 @@ The data analysts at EnchantedEars are interested in the information that the da
 | Adam Verogue | Data Analyst; SELECT DML queries |
 | Tim Snapps | Junior Data Analyst; SELECT DML queries except for personal and financial data. |
 | EnchantedEarsApplication | Account that the software uses to access the database. Cannot perform CRUD operations directly on the database tables. |
+
+![Users and roles](Screenshots/week2-2.png/)
+
+_*sa user was already present that is why in the assignment the SQL script includes 'ALTER LOGIN sa'_
 
 #### 2.3 SQL
 Create the following DML queries to extract important information from the database. Test data must be added to obtain information.
