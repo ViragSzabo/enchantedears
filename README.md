@@ -82,6 +82,8 @@ The data analysts at EnchantedEars are interested in the information that the da
 | Adam Verogue | Data Analyst; SELECT DML queries |
 | Tim Snapps | Junior Data Analyst; SELECT DML queries except for personal and financial data. |
 | EnchantedEarsApplication | Account that the software uses to access the database. Cannot perform CRUD operations directly on the database tables. |
+| --- | --- |
+
 ![Users and roles](Screenshots/week2-2.png/)
 
 #### 2.3 SQL
