@@ -93,6 +93,9 @@ _*sa user was already present that is why in the assignment the SQL script inclu
 Create the following DML queries to extract important information from the database. Test data must be added to obtain information.
 ##### 2.3.1 Add test data
 For every table, create several DML queries that place several test values in the database. Make sure you have enough data to work with. To make things easy for yourself, you can use tools like "Mockaroo", that generate actual test data for you. Several situations must be retrievable; see component “information needs”. Deliver the DDL queries in a .sql file with the file name: week3-1.sql.
+
+![Users and roles](Screenshots/week3-1.png/)
+
 ##### 2.3.2 Information needs
 The data analysts at EnchantedEars are interested in the information that the data in the database provides. Pay attention to efficiency: JOINS and SUBQUERY'S, EXISTS(), and IN(), etc. Develop the following information needs as DML queries. Deliver the DDL queries in a .sql file with the file name: week3-2.sql.
 
