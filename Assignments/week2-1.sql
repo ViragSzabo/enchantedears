@@ -1,20 +1,13 @@
 USE enchantedears
 
 CREATE TABLE Subscription (
-    SubscriptionID INT PRIMARY KEY,
+    SubscriptionID INT IDENTITY(1,1) PRIMARY KEY,
     Name VARCHAR(50) NOT NULL,
     Price DECIMAL(10, 2) NOT NULL
 );
 
-CREATE TABLE FamilySubscription (
-    SubscriptionID INT PRIMARY KEY,
-    Name VARCHAR(50) NOT NULL,
-    Price DECIMAL(10, 2) NOT NULL,
-    MemberCount INT NOT NULL CHECK (MemberCount = 4)
-);
-
 CREATE TABLE AppUser (
-    UserID INT PRIMARY KEY,
+    UserID INT IDENTITY(1,1) PRIMARY KEY,
     Username VARCHAR(50) NOT NULL,
     Email VARCHAR(100) NOT NULL,
     Password VARCHAR(100) NOT NULL,
@@ -23,13 +16,13 @@ CREATE TABLE AppUser (
 );
 
 CREATE TABLE Artist (
-	ArtistID INT PRIMARY KEY,
+	ArtistID INT IDENTITY(1,1) PRIMARY KEY,
 	Name VARCHAR(100) NOT NULL,
 	Description TEXT
 );
 
 CREATE TABLE Album (
-    AlbumID INT PRIMARY KEY,
+    AlbumID INT IDENTITY(1,1) PRIMARY KEY,
     Title VARCHAR(100) NOT NULL,
     ReleaseDate DATE,
     ArtistID INT,
@@ -37,13 +30,13 @@ CREATE TABLE Album (
 );
 
 CREATE TABLE Playlist (
-    PlaylistID INT PRIMARY KEY,
+    PlaylistID INT IDENTITY(1,1) PRIMARY KEY,
     Name VARCHAR(100) NOT NULL,
     Description TEXT
 );
 
 CREATE TABLE Song (
-    SongID INT PRIMARY KEY,
+    SongID INT IDENTITY(1,1) PRIMARY KEY,
     Title VARCHAR(100) NOT NULL,
     ArtistID INT,
     Genre VARCHAR(50),
