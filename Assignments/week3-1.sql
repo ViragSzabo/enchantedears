@@ -1,3 +1,6 @@
+USE enchantedears;
+GO
+
 -- Add test data for the AppUser table
 INSERT INTO dbo.Subscription (Name, Price)
 VALUES
