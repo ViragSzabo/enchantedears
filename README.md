@@ -133,12 +133,21 @@ Implement referential integrity for all foreign key constraints for a logical us
 
 #### 2.5 Database Recovery
 EnchantedEars aims to provide the current database with backup, recovery, and concurrency solutions. Execute the following assignments so that the Netflix database can be used in production.
+
 ##### 2.5.1 Backup
 Create a full, differential, and incremental backup and transaction log for the Netflix database using CREATE BACKUP statements. Deliver the SQL commands in a .sql file with the file name: week5-1.sql.
+
+![Backup](Screenshots/week5-1-backups.png/)
+
 ##### 2.5.2 Recovery
 Use the RESTORE statement to restore the database with a full, differential and incremental backup and transaction log. Implement a transaction for a logical use case. Deliver the SQL commands in a .sql file with the file name: week5-2.sql.
+
+
+
 ##### 2.5.3 Concurrency
 Reduce the chance of concurrency problems to a minimum using a query, for instance with phantom reads and deadlocks. In addition, create two transactions for logical use cases. Deliver the SQL commands in a .sql file with the file name: week5-3.sql.
+
+
 
 #### 2.6 Final Assignment
 EnchantedEars has asked NHL Stenden to investigate whether present-day technology can make a positive contribution to the current implementation. The EnchantedEars platform uses Microsoft technology and EnchantedEars has therefore explicitly requested that ADO.NET and Entity Framework be used as concrete final situations in the investigation. EnchantedEars has no experience with NoSQL databases and has indicated that non-relational databases must also be included in the investigation. 
