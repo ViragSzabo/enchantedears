@@ -1,17 +1,11 @@
 USE enchantedears;
 GO
 
--- Trigger 2a: Update Song count in Playlist when a new song is added
-CREATE TRIGGER tr_InsertUpdatePlaylistSongCount ON dbo.PlaylistSong
-AFTER INSERT
-AS
-BEGIN
-    UPDATE ps
-    SET SongCount = (
-        SELECT COUNT(*)
-        FROM dbo.PlaylistSong
-        WHERE PlaylistID = ps.PlaylistID
-    )
-    FROM dbo.PlaylistSong ps
-    INNER JOIN inserted i ON ps.PlaylistID = i.PlaylistID;
-END;
+-- Implement referential integrity for foreign key constraints
+-- (Assuming SubscriptionID is the foreign key in AppUser referencing Subscription)
+ALTER TABLE AppUser
+ADD CONSTRAINT FK_Subscription
+FOREIGN KEY (SubscriptionID)
+REFERENCES Subscription(SubscriptionID)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
