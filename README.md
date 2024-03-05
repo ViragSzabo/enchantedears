@@ -168,11 +168,11 @@ Next, generate a report in PDF format. This is not an official document and DOES
 | Date | Document |
 | --- | --- |
 | February 4 | [Use Case](Documents/UseCase.pdf) |
-| February 5 | [DBMS](Documents/DBMS.pdf) |
-| February 6 | [SQL](Documents/SQL.pdf) |
-| February 7 | [Database Integrity](Documents/DBIntegrity.pdf) |
-| February 8 | [Database Recovery](Documents/DBRecovery.pdf) |
-| February 9 | [Final Assignment](Documents/FinalAssignment.pdf) |
+| March 3 | [DBMS](Documents/DBMS.pdf) |
+| March 3 - 5 | [SQL](Documents/SQL.pdf) |
+| March 5 | [Database Integrity](Documents/DBIntegrity.pdf) |
+| March 5 | [Database Recovery](Documents/DBRecovery.pdf) |
+| March ... | [Final Assignment](Documents/FinalAssignment.pdf) |
 
 ### 4 Additional Information
 Virag Szabo | BS | Information Technology | February 2024
