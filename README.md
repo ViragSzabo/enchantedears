@@ -112,7 +112,7 @@ Provide the databases with primary and foreign keys if not yet provided. Pay att
 ##### 2.4.2 Constraints
 Provide the database with a few constraints. Implement NOT NULL, UNIQUE, and CHECK for columns where it is logical to do so at least once. Tip: CASCADE and NO ACTION are not the only actions that can follow after a constraint.
 
-![Constraints](Screenshots/week4-1.2.png/)
+![Constraints](Screenshots/week4-cons.png/)
 
 ##### 2.4.3 Views, Stored Procedures and Triggers 
 Realise two views, two stored procedures, and two triggers. Use views, stored procedures, and triggers for the right purposes.
@@ -142,12 +142,12 @@ Create a full, differential, and incremental backup and transaction log for the 
 ##### 2.5.2 Recovery
 Use the RESTORE statement to restore the database with a full, differential and incremental backup and transaction log. Implement a transaction for a logical use case. Deliver the SQL commands in a .sql file with the file name: week5-2.sql.
 
-
+![Recovery](Screenshots/week5-2.png/)
 
 ##### 2.5.3 Concurrency
 Reduce the chance of concurrency problems to a minimum using a query, for instance with phantom reads and deadlocks. In addition, create two transactions for logical use cases. Deliver the SQL commands in a .sql file with the file name: week5-3.sql.
 
-
+![Concurrency](Screenshots/week5-3.png/)
 
 #### 2.6 Final Assignment
 EnchantedEars has asked NHL Stenden to investigate whether present-day technology can make a positive contribution to the current implementation. The EnchantedEars platform uses Microsoft technology and EnchantedEars has therefore explicitly requested that ADO.NET and Entity Framework be used as concrete final situations in the investigation. EnchantedEars has no experience with NoSQL databases and has indicated that non-relational databases must also be included in the investigation. 
