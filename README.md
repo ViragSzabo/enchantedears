@@ -103,14 +103,30 @@ The data analysts at EnchantedEars are interested in the information that the da
 
 #### 2.4 Database Integrity
 The EnchantedEars user or role cannot perform queries but must use views, triggers, and stored procedures. Implement the following measures to improve the integrity of the database
+
 ##### 2.4.1 Primary Keys, Foreign Keys and Index
 Provide the databases with primary and foreign keys if not yet provided. Pay attention to relationships and referential integrity. Also, provide the columns with an index wherever it is logical to do so.
+
+![Indexes](Screenshots/week4-1.png/)
+
 ##### 2.4.2 Constraints
 Provide the database with a few constraints. Implement NOT NULL, UNIQUE, and CHECK for columns where it is logical to do so at least once. Tip: CASCADE and NO ACTION are not the only actions that can follow after a constraint.
+
+![Constraints](Screenshots/week4-1.2.png/)
+
 ##### 2.4.3 Views, Stored Procedures and Triggers 
 Realise two views, two stored procedures, and two triggers. Use views, stored procedures, and triggers for the right purposes.
+
+![Triggers](Screenshots/week4-2.png/)
+
+![StoredProcedures](Screenshots/week4-stored.png/)
+
+![Trigger](Screenshots/week4-trigger.png/)
+
 ##### 2.4.4 Referential integrity
 Implement referential integrity for all foreign key constraints for a logical use case at least once.
+
+![ImplementReferentialIntegrity](Screenshots/week4-implement.png/)
 
 **Note: You are not allowed to develop the queries that you designed in week 3.**
 **Deliver the above as a single week4.sql file. So all answers must have been applied in the database and the used queries must be delivered for the assessment**
