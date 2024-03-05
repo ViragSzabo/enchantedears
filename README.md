@@ -137,7 +137,7 @@ EnchantedEars aims to provide the current database with backup, recovery, and co
 ##### 2.5.1 Backup
 Create a full, differential, and incremental backup and transaction log for the Netflix database using CREATE BACKUP statements. Deliver the SQL commands in a .sql file with the file name: week5-1.sql.
 
-![Backup](Screenshots/week5-1-backups.png/)
+![Backup](Screenshots/week5-backups.png/)
 
 ##### 2.5.2 Recovery
 Use the RESTORE statement to restore the database with a full, differential and incremental backup and transaction log. Implement a transaction for a logical use case. Deliver the SQL commands in a .sql file with the file name: week5-2.sql.
