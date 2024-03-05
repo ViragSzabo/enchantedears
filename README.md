@@ -122,12 +122,11 @@ Realise two views, two stored procedures, and two triggers. Use views, stored pr
 ![StoredProcedures](Screenshots/week4-stored.png/)
 
 ![Trigger](Screenshots/week4-trigger.png/)
-![RemoveTrigger](Screenshots/week4-removetrigger.png/)
 
 ##### 2.4.4 Referential integrity
 Implement referential integrity for all foreign key constraints for a logical use case at least once.
 
-![ImplementReferentialIntegrity](Screenshots/week4-removetrigger.png/)
+![ImplementReferentialIntegrity](Screenshots/week4-implement.png/)
 
 **Note: You are not allowed to develop the queries that you designed in week 3.**
 **Deliver the above as a single week4.sql file. So all answers must have been applied in the database and the used queries must be delivered for the assessment**
