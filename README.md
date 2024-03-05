@@ -99,6 +99,8 @@ For every table, create several DML queries that place several test values in th
 ##### 2.3.2 Information needs
 The data analysts at EnchantedEars are interested in the information that the data in the database provides. Pay attention to efficiency: JOINS and SUBQUERY'S, EXISTS(), and IN(), etc. Develop the following information needs as DML queries. Deliver the DDL queries in a .sql file with the file name: week3-2.sql.
 
+![Users and roles](Screenshots/week3-2.png/)
+
 #### 2.4 Database Integrity
 The EnchantedEars user or role cannot perform queries but must use views, triggers, and stored procedures. Implement the following measures to improve the integrity of the database
 ##### 2.4.1 Primary Keys, Foreign Keys and Index
