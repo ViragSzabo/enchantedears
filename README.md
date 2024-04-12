@@ -154,12 +154,20 @@ EnchantedEars has asked NHL Stenden to investigate whether present-day technolog
 Develop a program in C# that tests the speeds of ADO.NET, Entity Framework, and NoSQL using a Stopwatch. Make sure that all tests are combined in a single solution. Select one entity on which to perform CRUD operations. Do this for rows of 1, 1000, 100,000, and 1,000,000. Make sure that all tests within the various DBMSs are the same.
 ##### 2.6.1 ADO.NET
 Reuse the database that was created in previous weeks.
+
+
 ##### 2.6.2 Entity Framework
-Create the entire database with a Code-First approach, so you may not (and cannot) reuse the previously created database. 
+Create the entire database with a Code-First approach, so you may not (and cannot) reuse the previously created database.
+
+
 ##### 2.6.3 MongoDB
 Use MongoDB for the NoSQL test. Do not need to redesign and implement the entire database, but instead, select a use case comprising at least 3 tables.
+
+
 ###### 2.6.3.1 Example
 Select the “subscription” entity for the speed test, in which case you also include “user”.
+
+
 ###### 2.6.4 Report 
 Next, generate a report in PDF format. This is not an official document and DOES NOT need to contain a cover page, table of contents, etc. Presents the speeds in a matrix (table) and graphs. For each comparison an accompanying explanatory text to explain results that are worthy of note. Description of measures taken to demonstrate that the information is reliable, along with, at any rate, a description of the specifications of the device on which the tests were run.
 
