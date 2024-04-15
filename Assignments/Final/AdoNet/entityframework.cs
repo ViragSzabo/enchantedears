@@ -8,39 +8,66 @@ namespace DBSpeedTest
     {
         static void ProgramMain(string[] args)
         {
-            EntityFramework.Execute();
+            EntityFramework.Execute(1);
+            EntityFramework.Execute(1000);
+            EntityFramework.Execute(100000);
+            EntityFramework.Execute(1000000);
         }
     }
 
     internal class EntityFramework
     {
-        public static void Execute()
+        public static void Execute(int numRows)
         {
             try
             {
-                // Insert
-                ArtistContext context = new ArtistContext();
-                var newArtistData = new Artist { Name = "Billie Eilish", Description = "Pop" };
-                context.Artists.Add(newArtistData);
-                context.SaveChanges();
-                Console.WriteLine($"{newArtistData.Name} added.");
-
-                // Select
-                var selectArtist = context.Artists.FirstOrDefault(a => a.Name == "Billie Eilish");
-                if (selectArtist != null)
+                // SQL Server connection string
+                using (var context = new ArtistContext())
                 {
-                    Console.WriteLine($"Name: {selectArtist.Name}, Description: {selectArtist.Description}");
+                    for (int i = 0; i < numRows; i++)
+                    {
+                        // Insert
+                        var newArtistData = new Artist { Name = $"Billie Eilish {i}", Description = $"Pop {i}" };
+                        context.Artists.Add(newArtistData);
+                        context.SaveChanges();
+                    }
+                    Console.WriteLine($"{numRows} row(s) inserted.");
+
+                    for (int i = 0; i < numRows; i++)
+                    {
+                        // Select
+                        var selectArtist = context.Artists.FirstOrDefault(a => a.Name == $"Billie Eilish {i}");
+                        if (selectArtist != null)
+                        {
+                            Console.WriteLine($"Name: {selectArtist.Name}, Description: {selectArtist.Description}");
+                        }
+                    }
+                    Console.WriteLine($"Selected {numRows} row(s).");
+
+                    for (int i = 0; i < numRows; i++)
+                    {
+                        // Update
+                        var selectArtist = context.Artists.FirstOrDefault(a => a.Name == $"Billie Eilish {i}");
+                        if (selectArtist != null)
+                        {
+                            selectArtist.Description = $"Goth-Pop {i}";
+                            context.SaveChanges();
+                        }
+                    }
+                    Console.WriteLine($"Updated {numRows} row(s).");
+
+                    for (int i = 0; i < numRows; i++)
+                    {
+                        // Delete
+                        var selectArtist = context.Artists.FirstOrDefault(a => a.Name == $"Billie Eilish {i}");
+                        if (selectArtist != null)
+                        {
+                            context.Artists.Remove(selectArtist);
+                            context.SaveChanges();
+                        }
+                    }
+                    Console.WriteLine($"{numRows} row(s) deleted.");
                 }
-
-                // Update
-                selectArtist.Description = "Goth-Pop";
-                context.SaveChanges();
-                Console.WriteLine($"Description updated for {selectArtist.Name}.");
-
-                // Delete
-                context.Artists.Remove(selectArtist);
-                context.SaveChanges();
-                Console.WriteLine($"{selectArtist.Name} removed.");
             }
             catch (Exception ex)
             {
