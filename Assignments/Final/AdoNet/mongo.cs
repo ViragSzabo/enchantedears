@@ -16,48 +16,59 @@ namespace DBSpeedTest
         static void MongoMain(string[] args)
         {
             MongoDB mongoDB = new MongoDB();
-
-            // Example usage: Insert a song
-            Song newSong = new Song
-            {
-                Title = "Example Song",
-                Artist = "Example Artist",
-                Genre = "Example Genre",
-                ReleaseDate = DateTime.UtcNow,
-                Duration = TimeSpan.FromMinutes(4),
-                Album = "Example Album"
-            };
-            mongoDB.InsertSong(newSong);
-            Console.WriteLine("Inserted a new song.");
-
-            // Example usage: Get a song by its ID
             Song retrievedSong = new Song();
-            ObjectId songId = retrievedSong.Id;
-            mongoDB.InsertSong(retrievedSong);
+            ObjectId songId = mongoDB.GetSongOrPlaylistBy(retrievedSong.Id);
 
-            if (retrievedSong != null)
+            // Example usage: Insert songs
+            int numRows = 1000;
+            for (int i = 0; i < numRows; i++)
             {
-                Console.WriteLine($"Retrieved song: Title - {retrievedSong.Title}, Artist - {retrievedSong.Artist}");
+                Song newSong = new Song
+                {
+                    Title = $"Example Song {i}",
+                    Artist = $"Example Artist {i}",
+                    Genre = $"Example Genre {i}",
+                    ReleaseDate = DateTime.UtcNow.AddDays(i),
+                    Duration = TimeSpan.FromMinutes(4),
+                    Album = $"Example Album {i}"
+                };
+                mongoDB.InsertSong(newSong);
             }
-            else
+            Console.WriteLine($"{numRows} song(s) inserted.");
+
+            // Example usage: Get songs by their IDs
+            for (int i = 0; i < numRows; i++)
             {
-                Console.WriteLine("Song not found.");
+                if (retrievedSong != null)
+                {
+                    Console.WriteLine($"Retrieved song: Title - {retrievedSong.Title}, Artist - {retrievedSong.Artist}");
+                }
+                else
+                {
+                    Console.WriteLine($"Song with title 'Example Song {i}' not found.");
+                }
             }
 
-            // Example usage: Update a song
-            if (retrievedSong != null)
+            // Example usage: Update songs
+            for (int i = 0; i < numRows; i++)
             {
-                retrievedSong.Title = "Updated Example Song";
-                mongoDB.UpdateSong(songId, retrievedSong);
-                Console.WriteLine("Updated the song.");
+                if (retrievedSong != null)
+                {
+                    retrievedSong.Title = $"Updated Example Song {i}";
+                    mongoDB.UpdateSong(retrievedSong.Id, retrievedSong);
+                }
             }
+            Console.WriteLine($"{numRows} song(s) updated.");
 
-            // Example usage: Delete a song
-            if (retrievedSong != null)
+            // Example usage: Delete songs
+            for (int i = 0; i < numRows; i++)
             {
-                mongoDB.DeleteSong(songId);
-                Console.WriteLine("Deleted the song.");
+                if (retrievedSong != null)
+                {
+                    mongoDB.DeleteSong(retrievedSong.Id);
+                }
             }
+            Console.WriteLine($"{numRows} song(s) deleted.");
         }
     }
 
@@ -81,7 +92,7 @@ namespace DBSpeedTest
             mongoDBContext.Playlists.InsertOne(playlist);
         }
 
-        public void GetSongOrPlaylistBy(ObjectId id)
+        public ObjectId GetSongOrPlaylistBy(ObjectId id)
         {
             var song = mongoDBContext.Songs.Find(song => song.Id == id).FirstOrDefault();
             var playlist = mongoDBContext.Playlists.Find(playlist => playlist.Id == id).FirstOrDefault();
