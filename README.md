@@ -166,8 +166,15 @@ Use MongoDB for the NoSQL test. Do not need to redesign and implement the entire
 ![Screenshot](Assignments\Final\MongoDB\screenshot-code.png")
 
 ###### 2.6.3.1 Example
-Select the “subscription” entity for the speed test, in which case you also include “user”.
+Created a new song and artist and ran CRUD performs for testing out.
+####### 2.6.3.1.1 ADO.NET
+![Screenshot](Assignments\Final\AdoNet\test_run.png)
 
+####### 2.6.3.1.2 Entity Framework
+![Screenshot](Assignments\Final\EntityFramework\test_run.png)
+
+####### 2.6.3.1.3 MongoDB
+![Screenshot](Assignments\Final\MongoDB\test_run.png")
 
 ###### 2.6.4 Report 
 Next, generate a report in PDF format. This is not an official document and DOES NOT need to contain a cover page, table of contents, etc. Presents the speeds in a matrix (table) and graphs. For each comparison an accompanying explanatory text to explain results that are worthy of note. Description of measures taken to demonstrate that the information is reliable, along with, at any rate, a description of the specifications of the device on which the tests were run.
