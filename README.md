@@ -163,8 +163,8 @@ Create the entire database with a Code-First approach, so you may not (and canno
 
 ##### 2.6.3 MongoDB
 Use MongoDB for the NoSQL test. Do not need to redesign and implement the entire database, but instead, select a use case comprising at least 3 tables.
-![Screenshot](Assignments\Final\MongoDB\screenshot.png")
-![Screenshot](Assignments\Final\MongoDB\screenshot-code.png")
+![Screenshot](Screenshots\final-mongo-screenshot.png")
+![Screenshot](Screenshots\final-mongo-screenshot-code.png")
 
 ###### 2.6.3.1 Example
 Created a new song and artist and ran CRUD performs for testing out.
@@ -175,7 +175,7 @@ Entity Framework
 ![Screenshot](Assignments\Final\EntityFramework\test_run.png)
 
 MongoDB
-![Screenshot](Assignments\Final\MongoDB\test_run.png")
+![Screenshot](Screenshots\final-mongo-test_run.png")
 
 ###### 2.6.4 Report 
 Next, generate a report in PDF format. This is not an official document and DOES NOT need to contain a cover page, table of contents, etc. Presents the speeds in a matrix (table) and graphs. For each comparison an accompanying explanatory text to explain results that are worthy of note. Description of measures taken to demonstrate that the information is reliable, along with, at any rate, a description of the specifications of the device on which the tests were run.
