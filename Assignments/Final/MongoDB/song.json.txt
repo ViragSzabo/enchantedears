@@ -1,0 +1,13 @@
+[
+  {
+    "songID": "1",
+    "title": "Bohemian Rhapsody",
+    "artist": "Queen",
+    "genre": "Rock",
+    "release_date": "1975-10-31",
+    "duration": "00:05:55",
+    "album": "A Night at the Opera",
+    "playlist": ["Classic Rock", "Favorites"]
+  },
+  // Add more song documents as needed
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "playlistID": "1",
+    "name": "Classic Rock",
+    "description": "A collection of classic rock songs",
+    "songs": ["Bohemian Rhapsody", "Stairway to Heaven", "Hotel California"]
+  },
+  {
+    "playlistID": "2",
+    "name": "Favorites",
+    "description": "My favorite songs",
+    "songs": ["Bohemian Rhapsody", "Hurt", "Imagine"]
+  }
+  // Add more playlist documents as needed
+]

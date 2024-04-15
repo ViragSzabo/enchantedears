@@ -1,98 +1,109 @@
-using DBSpeedTest.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Dynamic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Security.Cryptography.X509Certificates;
 
 namespace DBSpeedTest
 {
-    public class Program
+    partial class Program
     {
-        private static string GenerateArtistName (Random r, int len)
+        static void Main(string[] args)
         {
-            string[] consonants = { "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "l", "n", "p", "q", "r", "s", "sh", "zh", "t", "v", "w", "x" };
-            string[] vowels = { "a", "e", "i", "o", "u", "ae", "y" };
-            string Name = "";
-            Name += consonants[r.Next(consonants.Length)].ToUpper();
-            Name += vowels[r.Next(vowels.Length)];
-            int b = 2;
-            while (b < len)
-            {
-                Name += consonants[r.Next(consonants.Length)];
-                b++;
-                if (b < len)
-                {
-                    Name += vowels[r.Next(vowels.Length)];
-                    b++;
-                }
-            }
-            return Name;
-        }
-        private static String GenerateArtistDescription (Random r)
-        {
-            String[] genre = { "pop", "rock", "disco", "hiphop", "rap", "classic", "postmodern" };
-            return genre[r.Next(genre.Length)];
-        }
-
-        private static void SetDBSize(int size)
-        {
-            SqlConnection con;
-            static string connectionString = @"Data Source=LAPTOP-CLDC7DLB\SQLEXPRESS;Initial Catalog=enchantedears;Integrated Security=true;";
-            con = new SqlConnection(connectionString);
-            con.Open();
-
-            SqlCommand commandDeleteAllData;
-            SqlDataAdapter adapterDeleteAllData = new SqlDataAdapter();
-            String sqlDelete = "TRUNCATE TABLE [dbo].[artistSpeedTest]";
-            commandDeleteAllData = new SqlCommand(sqlDelete, con);
-            adapterDeleteAllData.DeleteCommand = new SqlCommand(sqlDelete, con);
-            adapterDeleteAllData.DeleteCommand.ExecuteNonQuery();
+            AdoNet adoNet = new AdoNet();
+            adoNet.PerformOperations();
         
-            Random r = new Random();
-            for (int i = 0; i < size; i++)
+        }
+    }
+
+    internal class AdoNet
+    {
+        public void PerformOperations()
+        {
+            // SQL Server connection string
+            String connectionString = @"Data Source=LAPTOP-CLDC7DLB\SQLEXPRESS;Initial Catalog=enchantedears;Integrated Security=true;";
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand commandInsert;
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                string sqlInster = "INSERT INTO [dbo].[artistSpeedTest](Name, Description) VALUES('" + GenerateArtistName(r) + "', '" + GenerateArtistDescription(r) + "')";
-                commandInsert = new SqlCommand(sqlInsert, con);
-                adapter.InsertCommand = new SqlCommand(sqlInsert, con);
-                adapter.InsertCommand.ExecuteNonQuery();
-                commandInsert.Dispose();
+                connection.Open();
+
+                String name = "Billie Eilish";
+                String description = "Pop";
+
+                PerformInsertOperation(connection, name, description);
+                Console.WriteLine(name + " got added.");
+
+                PerformSelectOperation(connection, name);
+                Console.WriteLine("Selected " + name);
+
+                PerformUpdateOperation(connection, name, description);
+                Console.WriteLine("Updated the description of " + name + ". The refreshed description: " + description);
+
+                PerformDeleteOperation(connection, name);
+                Console.WriteLine(name + " got removed.");
             }
         }
 
-        private static void TestAll()
+        private static void PerformInsertOperation(SqlConnection connectionString, String name, String description)
         {
-            TestAdoNet();
-            TestEntityFramework();
-            TestNoSQL();
+            String insertQuery = "INSERT INTO dbo.Artist (Name, Description) VALUES (@Value1, @Value2)";
+            SqlCommand command = new SqlCommand(insertQuery, connectionString);
+            command.Parameters.AddWithValue("@Value1", name);
+            command.Parameters.AddWithValue("@Value2", description);
+
+            int rowsAffected = command.ExecuteNonQuery();
+            Console.WriteLine($"{rowsAffected} row(s) inserted.");
         }
 
-        private static void TestAdoNet()
+        private static void PerformSelectOperation(SqlConnection connectionString, String name)
         {
-            String connectionString;
-            SqlConnection con;
-            static string connectionString = @"Data Source=LAPTOP-CLDC7DLB\SQLEXPRESS;Initial Catalog=enchantedears;Integrated Security=true;";
-            con = new SqlConnection(connectionString);
-            con.Open();
-            
-            SqlCommand command;
-            String sql;
+            string selectQuery = "SELECT * FROM dbo.Artist WHERE name = @address";
+            SqlCommand command = new SqlCommand(selectQuery, connectionString);
+            command.Parameters.AddWithValue("@address", name); 
 
-            int lines = 1000;
-            int[] testLines = new int[]{1, 10, 1000, 100000, 1000000};
-
-            // continue...
+            try
+            {
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Console.WriteLine($"Name: {reader["Name"]}, Description: {reader["Description"]}");
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
-        public static void Main(string[] args)
+        private static void PerformDeleteOperation(SqlConnection connectionString, String name)
         {
-            TestAll();
+            string deleteQuery = "DELETE FROM dbo.Artist WHERE Name = @name";
+            SqlCommand command = new SqlCommand(deleteQuery, connectionString);
+            command.Parameters.AddWithValue("@name", "Billie Eilish");
+
+            try
+            {
+                int rowsAffected = command.ExecuteNonQuery();
+                Console.WriteLine($"{rowsAffected} row(s) deleted.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
+        private static void PerformUpdateOperation(SqlConnection connectionString, String name, String description)
+        {
+            string updateQuery = "UPDATE dbo.Artist SET Description = @description WHERE Name = @name";
+            SqlCommand command = new SqlCommand(updateQuery, connectionString);
+            command.Parameters.AddWithValue("@description", "Goth-Pop");
+            command.Parameters.AddWithValue("@name", "Billie Eilish");
+            try
+            {
+                int rowsAffected = command.ExecuteNonQuery();
+                Console.WriteLine($"{rowsAffected} row(s) deleted.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }

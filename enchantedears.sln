@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
+# Blend for Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assignments", "Assignments", "{C32604EF-6C88-472C-99DC-CB247B35C843}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Final", "Final", "{5967D59E-8937-4F11-86E7-541433A3329F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "adonet", "Assignments\Final\AdoNet\adonet.csproj", "{B7724952-38A9-4814-A224-F544DA615D09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBSpeedTest", "Assignments\Final\AdoNet\DBSpeedTest.csproj", "{B7724952-38A9-4814-A224-F544DA615D09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
