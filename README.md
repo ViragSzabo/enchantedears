@@ -189,7 +189,7 @@ Next, generate a report in PDF format. This is not an official document and DOES
 | March 3 - 5 | [SQL](Documents/SQL.pdf) |
 | March 5 | [Database Integrity](Documents/DBIntegrity.pdf) |
 | March 5 | [Database Recovery](Documents/DBRecovery.pdf) |
-| March ... | [Final Assignment](Documents/FinalAssignment.pdf) |
+| March 5-15 | [Final Assignment](Documents/FinalAssignment.pdf) |
 
 ### 4 Additional Information
 Virag Szabo | BS | Information Technology | February 2024
