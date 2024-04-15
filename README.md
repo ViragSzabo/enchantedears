@@ -153,6 +153,29 @@ Reduce the chance of concurrency problems to a minimum using a query, for instan
 EnchantedEars has asked NHL Stenden to investigate whether present-day technology can make a positive contribution to the current implementation. The EnchantedEars platform uses Microsoft technology and EnchantedEars has therefore explicitly requested that ADO.NET and Entity Framework be used as concrete final situations in the investigation. EnchantedEars has no experience with NoSQL databases and has indicated that non-relational databases must also be included in the investigation. 
 Develop a program in C# that tests the speeds of ADO.NET, Entity Framework, and NoSQL using a Stopwatch. Make sure that all tests are combined in a single solution. Select one entity on which to perform CRUD operations. Do this for rows of 1, 1000, 100,000, and 1,000,000. Make sure that all tests within the various DBMSs are the same.
 
+##### 2.6.1 ADO.NET
+Reuse the database that was created in previous weeks.
+![Screenshot](Assignments\Final\AdoNet\screenshot.png)
+
+##### 2.6.2 Entity Framework
+Create the entire database with a Code-First approach, so you may not (and cannot) reuse the previously created database.
+![Screenshot](Assignments\Final\EntityFramework\screenshot.png)
+
+##### 2.6.3 MongoDB
+Use MongoDB for the NoSQL test. Do not need to redesign and implement the entire database, but instead, select a use case comprising at least 3 tables.
+![Screenshot](Assignments\Final\MongoDB\screenshot.png")
+![Screenshot](Assignments\Final\MongoDB\screenshot-code.png")
+
+###### 2.6.3.1 Example
+Created a new song and artist and ran CRUD performs for testing out.
+ADO.NET
+![Screenshot](Assignments\Final\AdoNet\test_run.png)
+
+Entity Framework
+![Screenshot](Assignments\Final\EntityFramework\test_run.png)
+
+MongoDB
+![Screenshot](Assignments\Final\MongoDB\test_run.png")
 
 ###### 2.6.4 Report 
 Next, generate a report in PDF format. This is not an official document and DOES NOT need to contain a cover page, table of contents, etc. Presents the speeds in a matrix (table) and graphs. For each comparison an accompanying explanatory text to explain results that are worthy of note. Description of measures taken to demonstrate that the information is reliable, along with, at any rate, a description of the specifications of the device on which the tests were run.
