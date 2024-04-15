@@ -8,14 +8,22 @@ namespace DBSpeedTest
         static void Main(string[] args)
         {
             AdoNet adoNet = new AdoNet();
-            adoNet.PerformOperations();
-        
+
+            int[] numRowOptions = { 1, 1000, 100000, 1000000 };
+
+            foreach (int numRows in numRowOptions)
+            {
+                Console.WriteLine($"Testing with {numRows} rows:");
+                adoNet.PerformOperations(numRows);
+                Console.WriteLine();
+            }
+
         }
     }
 
     internal class AdoNet
     {
-        public void PerformOperations()
+        public void PerformOperations(int numRows)
         {
             // SQL Server connection string
             String connectionString = @"Data Source=LAPTOP-CLDC7DLB\SQLEXPRESS;Initial Catalog=enchantedears;Integrated Security=true;";
@@ -26,17 +34,29 @@ namespace DBSpeedTest
                 String name = "Billie Eilish";
                 String description = "Pop";
 
-                PerformInsertOperation(connection, name, description);
-                Console.WriteLine(name + " got added.");
+                for (int i = 0; i < numRows; i++)
+                {
+                    PerformInsertOperation(connection, $"{name} {i}", $"{description} {i}");
+                }
+                Console.WriteLine($"{numRows} row(s) inserted.");
 
-                PerformSelectOperation(connection, name);
-                Console.WriteLine("Selected " + name);
+                for (int i = 0; i < numRows; i++)
+                {
+                    PerformSelectOperation(connection, $"{name} {i}");
+                }
+                Console.WriteLine($"Selected {numRows} row(s).");
 
-                PerformUpdateOperation(connection, name, description);
-                Console.WriteLine("Updated the description of " + name + ". The refreshed description: " + description);
+                for (int i = 0; i < numRows; i++)
+                {
+                    PerformUpdateOperation(connection, $"{name} {i}", $"{description} Updated {i}");
+                }
+                Console.WriteLine($"Updated {numRows} row(s).");
 
-                PerformDeleteOperation(connection, name);
-                Console.WriteLine(name + " got removed.");
+                for (int i = 0; i < numRows; i++)
+                {
+                    PerformDeleteOperation(connection, $"{name} {i}");
+                }
+                Console.WriteLine($"{numRows} row(s) deleted.");
             }
         }
 
