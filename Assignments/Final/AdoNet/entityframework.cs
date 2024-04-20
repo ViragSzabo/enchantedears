@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 
 namespace DBSpeedTest
@@ -21,6 +22,9 @@ namespace DBSpeedTest
         {
             try
             {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
                 // SQL Server connection string
                 using (var context = new ArtistContext())
                 {
@@ -31,7 +35,7 @@ namespace DBSpeedTest
                         context.Artists.Add(newArtistData);
                         context.SaveChanges();
                     }
-                    Console.WriteLine($"{numRows} row(s) inserted.");
+                    //Console.WriteLine($"{numRows} row(s) inserted.");
 
                     for (int i = 0; i < numRows; i++)
                     {
@@ -54,7 +58,7 @@ namespace DBSpeedTest
                             context.SaveChanges();
                         }
                     }
-                    Console.WriteLine($"Updated {numRows} row(s).");
+                    //Console.WriteLine($"Updated {numRows} row(s).");
 
                     for (int i = 0; i < numRows; i++)
                     {
@@ -66,8 +70,11 @@ namespace DBSpeedTest
                             context.SaveChanges();
                         }
                     }
-                    Console.WriteLine($"{numRows} row(s) deleted.");
+                    //Console.WriteLine($"{numRows} row(s) deleted.");
                 }
+
+                stopwatch.Stop();
+                Console.WriteLine($"Time taken for {numRows} rows: {stopwatch.ElapsedMilliseconds} ms");
             }
             catch (Exception ex)
             {

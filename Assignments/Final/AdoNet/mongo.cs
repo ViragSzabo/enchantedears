@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Bson.Serialization.Serializers;
+using System.Diagnostics;
 
 namespace DBSpeedTest
 {
@@ -15,8 +16,12 @@ namespace DBSpeedTest
     {
         static void MongoMain(string[] args)
         {
+            Stopwatch stopwatch = new Stopwatch();
             MongoDB mongoDB = new MongoDB();
             Song retrievedSong = new Song();
+
+            stopwatch.Start();
+
             ObjectId songId = mongoDB.GetSongOrPlaylistBy(retrievedSong.Id);
 
             // Example usage: Insert songs
@@ -69,6 +74,9 @@ namespace DBSpeedTest
                 }
             }
             Console.WriteLine($"{numRows} song(s) deleted.");
+
+            stopwatch.Stop();
+            Console.WriteLine($"Time taken: {stopwatch.ElapsedMilliseconds} ms");
         }
     }
 
@@ -114,6 +122,8 @@ namespace DBSpeedTest
             {
                 Console.WriteLine("Playlist not found.");
             }
+
+            return song.Id;
         }
 
         public void UpdateSong(ObjectId id, Song song)

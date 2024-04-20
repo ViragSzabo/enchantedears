@@ -1,5 +1,6 @@
 using System;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace DBSpeedTest
 {
@@ -13,11 +14,18 @@ namespace DBSpeedTest
 
             foreach (int numRows in numRowOptions)
             {
-                Console.WriteLine($"Testing with {numRows} rows:");
+                //Console.WriteLine($"Testing with {numRows} rows:");
+
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
                 adoNet.PerformOperations(numRows);
+
+                stopwatch.Stop();
+
+                Console.WriteLine($"Time taken: {stopwatch.ElapsedMilliseconds} ms");
                 Console.WriteLine();
             }
-
         }
     }
 
@@ -68,16 +76,16 @@ namespace DBSpeedTest
             command.Parameters.AddWithValue("@Value2", description);
 
             int rowsAffected = command.ExecuteNonQuery();
-            Console.WriteLine($"{rowsAffected} row(s) inserted.");
+            //Console.WriteLine($"{rowsAffected} row(s) inserted.");
         }
 
         private static void PerformSelectOperation(SqlConnection connectionString, String name)
         {
             string selectQuery = "SELECT * FROM dbo.Artist WHERE name = @address";
             SqlCommand command = new SqlCommand(selectQuery, connectionString);
-            command.Parameters.AddWithValue("@address", name); 
+            command.Parameters.AddWithValue("@address", name);
 
-            try
+            /*try
             {
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
@@ -89,7 +97,7 @@ namespace DBSpeedTest
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }
+            }*/
         }
 
         private static void PerformDeleteOperation(SqlConnection connectionString, String name)
@@ -98,7 +106,7 @@ namespace DBSpeedTest
             SqlCommand command = new SqlCommand(deleteQuery, connectionString);
             command.Parameters.AddWithValue("@name", "Billie Eilish");
 
-            try
+            /*try
             {
                 int rowsAffected = command.ExecuteNonQuery();
                 Console.WriteLine($"{rowsAffected} row(s) deleted.");
@@ -106,7 +114,7 @@ namespace DBSpeedTest
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }
+            }*/
         }
 
         private static void PerformUpdateOperation(SqlConnection connectionString, String name, String description)
@@ -115,7 +123,7 @@ namespace DBSpeedTest
             SqlCommand command = new SqlCommand(updateQuery, connectionString);
             command.Parameters.AddWithValue("@description", "Goth-Pop");
             command.Parameters.AddWithValue("@name", "Billie Eilish");
-            try
+            /*try
             {
                 int rowsAffected = command.ExecuteNonQuery();
                 Console.WriteLine($"{rowsAffected} row(s) deleted.");
@@ -123,7 +131,7 @@ namespace DBSpeedTest
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }
+            }*/
         }
     }
 }
