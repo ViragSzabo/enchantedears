@@ -155,30 +155,23 @@ Develop a program in C# that tests the speeds of ADO.NET, Entity Framework, and 
 
 ##### 2.6.1 ADO.NET
 Reuse the database that was created in previous weeks.
-![Screenshot](Assignments\Final\AdoNet\screenshot.png)
+Perform CRUD operations.
+![Screenshot](Assignments\Final\AdoNet\test_CRUD.png)
 
 ##### 2.6.2 Entity Framework
 Create the entire database with a Code-First approach, so you may not (and cannot) reuse the previously created database.
-![Screenshot](Assignments\Final\EntityFramework\screenshot.png)
+Perform CRUD operations.
+![Screenshot](Assignments\Final\EntityFramework\test_CRUD.png)
 
 ##### 2.6.3 MongoDB
-Use MongoDB for the NoSQL test. Do not need to redesign and implement the entire database, but instead, select a use case comprising at least 3 tables.
-![Screenshot](Assignments\Final\MongoDB\final-mongo-screenshot.png")
-![Screenshot](Assignments\Final\MongoDB\final-mongo-screenshot-code.png")
-
-###### 2.6.3.1 Example
-Created a new song and artist and ran CRUD performs for testing out.
-ADO.NET
-![Screenshot](Assignments\Final\AdoNet\test_run.png)
-
-Entity Framework
-![Screenshot](Assignments\Final\EntityFramework\test_run.png)
-
-MongoDB
-![Screenshot](Assignments\Final\MongoDB\final-mongo-test_run.png")
+Do not need to redesign and implement the entire database but instead, select a use case comprising at least 3 tables.
+Perform CRUD operations.
+![Screenshot](Assignments\Final\MongoDB\test_CRUD.png)
 
 ###### 2.6.4 Report 
-Next, generate a report in PDF format. This is not an official document and DOES NOT need to contain a cover page, table of contents, etc. Presents the speeds in a matrix (table) and graphs. For each comparison an accompanying explanatory text to explain results that are worthy of note. Description of measures taken to demonstrate that the information is reliable, along with, at any rate, a description of the specifications of the device on which the tests were run.
+Next, generate a report in PDF format that is not an official document; meaning no need to have a cover page, table of contents, etc.
+Presents the speeds in a matrix (table) and graphs. For each comparison an accompanying explanatory text explaining results that are worthy of note.
+Description of measures taken to demonstrate that the information is reliable, along with, at any rate, a description of the specifications of the device on which the tests were run.
 
 ### 3 TimeTable
 *Time can be changed here.*
