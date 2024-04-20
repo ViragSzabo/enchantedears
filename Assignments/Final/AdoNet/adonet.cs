@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace DBSpeedTest
 {
+
     partial class Program
     {
         static void Main(string[] args)
