@@ -11,11 +11,12 @@ namespace DBSpeedTest
         {
             AdoNet adoNet = new AdoNet();
 
-            int[] numRowOptions = { 1, 1000, 100000, 1000000 };
+            //int[] numRowOptions = { 1, 1000, 100000, 1000000 };
+            int[] numRowOptions = { 10000 };
 
             foreach (int numRows in numRowOptions)
             {
-                //Console.WriteLine($"Testing with {numRows} rows:");
+                Console.WriteLine($"Testing with {numRows} rows:");
 
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
@@ -24,7 +25,7 @@ namespace DBSpeedTest
 
                 stopwatch.Stop();
 
-                Console.WriteLine($"Time taken: {stopwatch.ElapsedMilliseconds} ms");
+                //Console.WriteLine($"Time taken: {stopwatch.ElapsedMilliseconds} ms");
                 Console.WriteLine();
             }
         }
@@ -40,32 +41,52 @@ namespace DBSpeedTest
             {
                 connection.Open();
 
-                String name = "Billie Eilish";
+                String name = "Taylor Swift";
                 String description = "Pop";
+
+                // Track time for insert operation
+                Stopwatch insertStopwatch = new Stopwatch();
+                insertStopwatch.Start();
 
                 for (int i = 0; i < numRows; i++)
                 {
                     PerformInsertOperation(connection, $"{name} {i}", $"{description} {i}");
                 }
-                Console.WriteLine($"{numRows} row(s) inserted.");
+                insertStopwatch.Stop();
+                Console.WriteLine($"Insertion Time: {insertStopwatch.ElapsedMilliseconds} ms");
+
+                // Track time for select operation
+                Stopwatch selectStopwatch = new Stopwatch();
+                selectStopwatch.Start();
 
                 for (int i = 0; i < numRows; i++)
                 {
                     PerformSelectOperation(connection, $"{name} {i}");
                 }
-                Console.WriteLine($"Selected {numRows} row(s).");
+                selectStopwatch.Stop();
+                Console.WriteLine($"Selection Time: {selectStopwatch.ElapsedMilliseconds} ms");
+
+                // Track time for update operation
+                Stopwatch updateStopwatch = new Stopwatch();
+                updateStopwatch.Start();
 
                 for (int i = 0; i < numRows; i++)
                 {
                     PerformUpdateOperation(connection, $"{name} {i}", $"{description} Updated {i}");
                 }
-                Console.WriteLine($"Updated {numRows} row(s).");
+                updateStopwatch.Stop();
+                Console.WriteLine($"Update Time: {updateStopwatch.ElapsedMilliseconds} ms");
+
+                // Track time for delete operation
+                Stopwatch deleteStopwatch = new Stopwatch();
+                deleteStopwatch.Start();
 
                 for (int i = 0; i < numRows; i++)
                 {
                     PerformDeleteOperation(connection, $"{name} {i}");
                 }
-                Console.WriteLine($"{numRows} row(s) deleted.");
+                deleteStopwatch.Stop();
+                Console.WriteLine($"Deletion Time: {deleteStopwatch.ElapsedMilliseconds} ms");
             }
         }
 
@@ -86,19 +107,19 @@ namespace DBSpeedTest
             SqlCommand command = new SqlCommand(selectQuery, connectionString);
             command.Parameters.AddWithValue("@address", name);
 
-            /*try
+            try
             {
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    Console.WriteLine($"Name: {reader["Name"]}, Description: {reader["Description"]}");
+                    //Console.WriteLine($"Name: {reader["Name"]}, Description: {reader["Description"]}");
                 }
                 reader.Close();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }*/
+            }
         }
 
         private static void PerformDeleteOperation(SqlConnection connectionString, String name)
@@ -107,15 +128,15 @@ namespace DBSpeedTest
             SqlCommand command = new SqlCommand(deleteQuery, connectionString);
             command.Parameters.AddWithValue("@name", "Billie Eilish");
 
-            /*try
+            try
             {
                 int rowsAffected = command.ExecuteNonQuery();
-                Console.WriteLine($"{rowsAffected} row(s) deleted.");
+                //Console.WriteLine($"{rowsAffected} row(s) deleted.");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }*/
+            }
         }
 
         private static void PerformUpdateOperation(SqlConnection connectionString, String name, String description)
@@ -124,15 +145,15 @@ namespace DBSpeedTest
             SqlCommand command = new SqlCommand(updateQuery, connectionString);
             command.Parameters.AddWithValue("@description", "Goth-Pop");
             command.Parameters.AddWithValue("@name", "Billie Eilish");
-            /*try
+            try
             {
                 int rowsAffected = command.ExecuteNonQuery();
-                Console.WriteLine($"{rowsAffected} row(s) deleted.");
+                //Console.WriteLine($"{rowsAffected} row(s) deleted.");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }*/
+            }
         }
     }
 }

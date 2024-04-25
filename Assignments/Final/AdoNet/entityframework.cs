@@ -7,12 +7,12 @@ namespace DBSpeedTest
 {
     partial class Program
     {
-        static void ProgramMain(string[] args)
+        static void EntityMain(string[] args)
         {
-            EntityFramework.Execute(1);
-            EntityFramework.Execute(1000);
+            //EntityFramework.Execute(1);
+            //EntityFramework.Execute(1000);
             EntityFramework.Execute(100000);
-            EntityFramework.Execute(1000000);
+            //EntityFramework.Execute(1000000);
         }
     }
 
@@ -31,46 +31,51 @@ namespace DBSpeedTest
                     for (int i = 0; i < numRows; i++)
                     {
                         // Insert
-                        var newArtistData = new Artist { Name = $"Billie Eilish {i}", Description = $"Pop {i}" };
+                        var newArtistData = new Artist { Name = $"Taylor Swift {i}", Description = $"Pop {i}" };
                         context.Artists.Add(newArtistData);
                         context.SaveChanges();
                     }
-                    //Console.WriteLine($"{numRows} row(s) inserted.");
+                    Console.WriteLine($"{numRows} row(s) inserted.");
+                    Console.WriteLine(stopwatch.Elapsed);
+
 
                     for (int i = 0; i < numRows; i++)
                     {
                         // Select
-                        var selectArtist = context.Artists.FirstOrDefault(a => a.Name == $"Billie Eilish {i}");
+                        var selectArtist = context.Artists.ToList().FirstOrDefault(a => a.Name == $"Taylor Swift {i}");
                         if (selectArtist != null)
                         {
                             Console.WriteLine($"Name: {selectArtist.Name}, Description: {selectArtist.Description}");
                         }
                     }
                     Console.WriteLine($"Selected {numRows} row(s).");
+                    Console.WriteLine(stopwatch.Elapsed);
 
                     for (int i = 0; i < numRows; i++)
                     {
                         // Update
-                        var selectArtist = context.Artists.FirstOrDefault(a => a.Name == $"Billie Eilish {i}");
+                        var selectArtist = context.Artists.ToList().FirstOrDefault(a => a.Name == $"Taylor Swift {i}");
                         if (selectArtist != null)
                         {
                             selectArtist.Description = $"Goth-Pop {i}";
                             context.SaveChanges();
                         }
                     }
-                    //Console.WriteLine($"Updated {numRows} row(s).");
+                    Console.WriteLine($"Updated {numRows} row(s).");
+                    Console.WriteLine(stopwatch.Elapsed);
 
                     for (int i = 0; i < numRows; i++)
                     {
                         // Delete
-                        var selectArtist = context.Artists.FirstOrDefault(a => a.Name == $"Billie Eilish {i}");
+                        var selectArtist = context.Artists.ToList().FirstOrDefault(a => a.Name == $"Taylor Swift {i}");
                         if (selectArtist != null)
                         {
                             context.Artists.Remove(selectArtist);
                             context.SaveChanges();
                         }
                     }
-                    //Console.WriteLine($"{numRows} row(s) deleted.");
+                    Console.WriteLine($"{numRows} row(s) deleted.");
+                    Console.WriteLine(stopwatch.Elapsed);
                 }
 
                 stopwatch.Stop();

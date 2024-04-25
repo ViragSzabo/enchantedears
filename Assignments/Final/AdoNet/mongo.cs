@@ -18,42 +18,43 @@ namespace DBSpeedTest
         {
             Stopwatch stopwatch = new Stopwatch();
             MongoDB mongoDB = new MongoDB();
-            Song retrievedSong = new Song();
+            Song retrievedSong = null;
 
             stopwatch.Start();
+            int numRows = 1000000;
 
-            ObjectId songId = mongoDB.GetSongOrPlaylistBy(retrievedSong.Id);
-
+            
             // Example usage: Insert songs
-            int numRows = 1000;
             for (int i = 0; i < numRows; i++)
             {
-                Song newSong = new Song
+                retrievedSong = new Song()
                 {
-                    Title = $"Example Song {i}",
-                    Artist = $"Example Artist {i}",
-                    Genre = $"Example Genre {i}",
+                    Title = "The Tortured Poets Department",
+                    Artist = "Taylor Swift",
+                    Genre = "Pop",
                     ReleaseDate = DateTime.UtcNow.AddDays(i),
                     Duration = TimeSpan.FromMinutes(4),
-                    Album = $"Example Album {i}"
+                    Album = "The Tortured Poets Department",
                 };
-                mongoDB.InsertSong(newSong);
+                mongoDB.InsertSong(retrievedSong);
             }
             Console.WriteLine($"{numRows} song(s) inserted.");
 
+
             // Example usage: Get songs by their IDs
+            ObjectId songId = mongoDB.GetSongOrPlaylistBy(retrievedSong.Id);
             for (int i = 0; i < numRows; i++)
             {
                 if (retrievedSong != null)
                 {
-                    Console.WriteLine($"Retrieved song: Title - {retrievedSong.Title}, Artist - {retrievedSong.Artist}");
+                    Console.WriteLine($"Retrieved song is {retrievedSong.Title} by {retrievedSong.Artist}");
                 }
                 else
                 {
-                    Console.WriteLine($"Song with title 'Example Song {i}' not found.");
+                    Console.WriteLine($"Song with title 'Example Song {retrievedSong.Title}' was not found.");
                 }
             }
-
+            
             // Example usage: Update songs
             for (int i = 0; i < numRows; i++)
             {
@@ -107,23 +108,15 @@ namespace DBSpeedTest
 
             if (song != null)
             {
-                Console.WriteLine($"Song found: Title - {song.Title}, Artist - {song.Artist}");
+                Console.WriteLine($"{song.Title} was found from the {song.Album} album by {song.Artist}");
+                return song.Id;
             }
-            else
+else
             {
                 Console.WriteLine("Song not found.");
+                return ObjectId.Empty;
+                // Return a default ObjectId or handle null accordingly
             }
-
-            if (playlist != null)
-            {
-                Console.WriteLine($"Playlist found: Name - {playlist.Name}, Description - {playlist.Description}");
-            }
-            else
-            {
-                Console.WriteLine("Playlist not found.");
-            }
-
-            return song.Id;
         }
 
         public void UpdateSong(ObjectId id, Song song)
