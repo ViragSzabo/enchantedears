@@ -12,20 +12,12 @@ namespace DBSpeedTest
             AdoNet adoNet = new AdoNet();
 
             //int[] numRowOptions = { 1, 1000, 100000, 1000000 };
-            int[] numRowOptions = { 10000 };
+            int[] numRowOptions = { 1, 1000, 100000, 1000000 };
 
             foreach (int numRows in numRowOptions)
             {
                 Console.WriteLine($"Testing with {numRows} rows:");
-
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
-
                 adoNet.PerformOperations(numRows);
-
-                stopwatch.Stop();
-
-                //Console.WriteLine($"Time taken: {stopwatch.ElapsedMilliseconds} ms");
                 Console.WriteLine();
             }
         }

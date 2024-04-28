@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{B7724952-38A9-4814-A224-F544DA615D09}|Assignments\\Final\\AdoNet\\DBSpeedTest.csproj|solutionrelative:assignments\\final\\adonet\\adonet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B7724952-38A9-4814-A224-F544DA615D09}|Assignments\\Final\\AdoNet\\DBSpeedTest.csproj|c:\\users\\szabo\\onedrive\\dokumentumok\\university\\database2\\enchantedears final assignment\\enchantedears\\assignments\\final\\adonet\\entityframework.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B7724952-38A9-4814-A224-F544DA615D09}|Assignments\\Final\\AdoNet\\DBSpeedTest.csproj|solutionrelative:assignments\\final\\adonet\\entityframework.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B7724952-38A9-4814-A224-F544DA615D09}|Assignments\\Final\\AdoNet\\DBSpeedTest.csproj|c:\\users\\szabo\\onedrive\\dokumentumok\\university\\database2\\enchantedears final assignment\\enchantedears\\assignments\\final\\adonet\\mongo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B7724952-38A9-4814-A224-F544DA615D09}|Assignments\\Final\\AdoNet\\DBSpeedTest.csproj|solutionrelative:assignments\\final\\adonet\\mongo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7724952-38A9-4814-A224-F544DA615D09}|Assignments\\Final\\AdoNet\\DBSpeedTest.csproj|c:\\users\\szabo\\onedrive\\dokumentumok\\university\\database2\\enchantedears final assignment\\enchantedears\\assignments\\final\\adonet\\entityframework.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7724952-38A9-4814-A224-F544DA615D09}|Assignments\\Final\\AdoNet\\DBSpeedTest.csproj|solutionrelative:assignments\\final\\adonet\\entityframework.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +26,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "mongo.cs",
               "DocumentMoniker": "C:\\Users\\szabo\\OneDrive\\Dokumentumok\\University\\Database2\\EnchantedEars Final Assignment\\enchantedears\\Assignments\\Final\\AdoNet\\mongo.cs",
               "RelativeDocumentMoniker": "Assignments\\Final\\AdoNet\\mongo.cs",
@@ -40,7 +40,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "entityframework.cs",
               "DocumentMoniker": "C:\\Users\\szabo\\OneDrive\\Dokumentumok\\University\\Database2\\EnchantedEars Final Assignment\\enchantedears\\Assignments\\Final\\AdoNet\\entityframework.cs",
               "RelativeDocumentMoniker": "Assignments\\Final\\AdoNet\\entityframework.cs",
@@ -60,7 +60,7 @@
               "RelativeDocumentMoniker": "Assignments\\Final\\AdoNet\\adonet.cs",
               "ToolTip": "C:\\Users\\szabo\\OneDrive\\Dokumentumok\\University\\Database2\\EnchantedEars Final Assignment\\enchantedears\\Assignments\\Final\\AdoNet\\adonet.cs",
               "RelativeToolTip": "Assignments\\Final\\AdoNet\\adonet.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABMAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAIMAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-05T16:47:36.425Z",
               "IsPinned": true,
