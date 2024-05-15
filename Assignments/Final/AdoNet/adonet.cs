@@ -1,150 +1,265 @@
+using Amazon.Auth.AccessControlPolicy.ActionIdentifiers;
 using System;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
 namespace DBSpeedTest
 {
-
     partial class Program
     {
-        static void Main(string[] args)
+        static void AMain(string[] args)
         {
             AdoNet adoNet = new AdoNet();
 
-            //int[] numRowOptions = { 1, 1000, 100000, 1000000 };
-            int[] numRowOptions = { 1, 1000, 100000, 1000000 };
-
-            foreach (int numRows in numRowOptions)
-            {
-                Console.WriteLine($"Testing with {numRows} rows:");
-                adoNet.PerformOperations(numRows);
-                Console.WriteLine();
-            }
-        }
-    }
-
-    internal class AdoNet
-    {
-        public void PerformOperations(int numRows)
-        {
-            // SQL Server connection string
-            String connectionString = @"Data Source=LAPTOP-CLDC7DLB\SQLEXPRESS;Initial Catalog=enchantedears;Integrated Security=true;";
+            string connectionString = @"Data Source=LAPTOP-CLDC7DLB\SQLEXPRESS;Initial Catalog=enchantedears;Integrated Security=true;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
-                String name = "Taylor Swift";
-                String description = "Pop";
+                string artistName = "Taylor Swift";
+                string description = "Pop";
 
-                // Track time for insert operation
+                // Track time for each operation
                 Stopwatch insertStopwatch = new Stopwatch();
-                insertStopwatch.Start();
-
-                for (int i = 0; i < numRows; i++)
-                {
-                    PerformInsertOperation(connection, $"{name} {i}", $"{description} {i}");
-                }
-                insertStopwatch.Stop();
-                Console.WriteLine($"Insertion Time: {insertStopwatch.ElapsedMilliseconds} ms");
-
-                // Track time for select operation
                 Stopwatch selectStopwatch = new Stopwatch();
-                selectStopwatch.Start();
-
-                for (int i = 0; i < numRows; i++)
-                {
-                    PerformSelectOperation(connection, $"{name} {i}");
-                }
-                selectStopwatch.Stop();
-                Console.WriteLine($"Selection Time: {selectStopwatch.ElapsedMilliseconds} ms");
-
-                // Track time for update operation
                 Stopwatch updateStopwatch = new Stopwatch();
-                updateStopwatch.Start();
-
-                for (int i = 0; i < numRows; i++)
-                {
-                    PerformUpdateOperation(connection, $"{name} {i}", $"{description} Updated {i}");
-                }
-                updateStopwatch.Stop();
-                Console.WriteLine($"Update Time: {updateStopwatch.ElapsedMilliseconds} ms");
-
-                // Track time for delete operation
                 Stopwatch deleteStopwatch = new Stopwatch();
-                deleteStopwatch.Start();
+
+                // Testing with several rows
+                int[] numRowOptions = { 1000000 };
+                foreach (int numRows in numRowOptions)
+                {
+                    Console.WriteLine($"Testing with {numRows} rows");
+                    //adoNet.PerformOperations(numRows);
+                    insertStopwatch.Start();
+                    adoNet.PerformInsertOperation(connection, artistName, description);
+                    insertStopwatch.Stop();
+                    selectStopwatch.Start();
+                    adoNet.PerformSelectOperation(connection, artistName);
+                    selectStopwatch.Stop();
+                    updateStopwatch.Start();
+                    description = "Indie Folk";
+                    adoNet.PerformUpdateOperation(connection, artistName, description);
+                    updateStopwatch.Stop();
+                    deleteStopwatch.Start();
+                    adoNet.PerformDeleteOperation(connection, artistName);
+                    deleteStopwatch.Stop();
+                    Console.WriteLine();
+                }
+                Console.WriteLine($"Insertion Time: {insertStopwatch.ElapsedMilliseconds} ms");
+                Console.WriteLine($"Selection Time: {selectStopwatch.ElapsedMilliseconds} ms");
+                Console.WriteLine($"Update Time: {updateStopwatch.ElapsedMilliseconds} ms");
+                Console.WriteLine($"Deletion Time: {deleteStopwatch.ElapsedMilliseconds} ms");
+
+                connection.Close();
+            }
+        }
+    }
+
+    public class AdoNet
+    {
+        public void PerformOperations(int numRows)
+        {
+            // SQL Server connection string
+            string connectionString = @"Data Source=LAPTOP-CLDC7DLB\SQLEXPRESS;Initial Catalog=enchantedears;Integrated Security=true;";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string artistName = "Taylor Swift";
+                string description = "Pop";
+
+                // Track time for each operation
+                Stopwatch insertStopwatch = new Stopwatch();
+                Stopwatch selectStopwatch = new Stopwatch();
+                Stopwatch updateStopwatch = new Stopwatch();
+                Stopwatch deleteStopwatch = new Stopwatch();
 
                 for (int i = 0; i < numRows; i++)
                 {
-                    PerformDeleteOperation(connection, $"{name} {i}");
+
+                    // Insertion operation
+                    insertStopwatch.Start();
+                    PerformInsertOperation(connection, artistName, description);
+                    insertStopwatch.Stop();
+
+                    // Selection operation
+                    selectStopwatch.Start();
+                    PerformSelectOperation(connection, artistName);
+                    selectStopwatch.Stop();
+
+                    // Update operation
+                    updateStopwatch.Start();
+                    description = "Indie Folk";
+                    PerformUpdateOperation(connection, artistName, description);
+                    updateStopwatch.Stop();
+
+                    // Deletion operation
+                    deleteStopwatch.Start();
+                    PerformDeleteOperation(connection, artistName);
+                    deleteStopwatch.Stop();
                 }
-                deleteStopwatch.Stop();
+                Console.WriteLine($"Insertion Time: {insertStopwatch.ElapsedMilliseconds } ms");
+                Console.WriteLine($"Selection Time: {selectStopwatch.ElapsedMilliseconds} ms");
+                Console.WriteLine($"Update Time: {updateStopwatch.ElapsedMilliseconds} ms");
                 Console.WriteLine($"Deletion Time: {deleteStopwatch.ElapsedMilliseconds} ms");
+
+                connection.Close();
             }
         }
 
-        private static void PerformInsertOperation(SqlConnection connectionString, String name, String description)
+        public void PerformInsertOperation(SqlConnection connection, string name, string description)
         {
-            String insertQuery = "INSERT INTO dbo.Artist (Name, Description) VALUES (@Value1, @Value2)";
-            SqlCommand command = new SqlCommand(insertQuery, connectionString);
-            command.Parameters.AddWithValue("@Value1", name);
-            command.Parameters.AddWithValue("@Value2", description);
-
-            int rowsAffected = command.ExecuteNonQuery();
-            //Console.WriteLine($"{rowsAffected} row(s) inserted.");
+            string insertQuery = "INSERT INTO dbo.Artist (Name, Description) VALUES (@name, @description)";
+            using (SqlCommand command = new SqlCommand(insertQuery, connection))
+            {
+                command.Parameters.AddWithValue("@name", name);
+                command.Parameters.AddWithValue("@description", description);
+                //int rowsAffected = command.ExecuteNonQuery();
+                //Console.WriteLine($"{rowsAffected} row(s) inserted.");
+            }
         }
 
-        private static void PerformSelectOperation(SqlConnection connectionString, String name)
+        public void PerformSelectOperation(SqlConnection connection, string name)
         {
-            string selectQuery = "SELECT * FROM dbo.Artist WHERE name = @address";
-            SqlCommand command = new SqlCommand(selectQuery, connectionString);
-            command.Parameters.AddWithValue("@address", name);
-
-            try
+            string selectQuery = "SELECT * FROM dbo.Artist WHERE Name = @name";
+            using (SqlCommand command = new SqlCommand(selectQuery, connection))
             {
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
+                command.Parameters.AddWithValue("@name", name);
+                try
                 {
-                    //Console.WriteLine($"Name: {reader["Name"]}, Description: {reader["Description"]}");
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        reader.Read();
+                        //Console.WriteLine("The row(s) has been read.");
+                        reader.Close();
+                    }
                 }
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
 
-        private static void PerformDeleteOperation(SqlConnection connectionString, String name)
+        public void PerformDeleteOperation(SqlConnection connection, string artistName)
         {
-            string deleteQuery = "DELETE FROM dbo.Artist WHERE Name = @name";
-            SqlCommand command = new SqlCommand(deleteQuery, connectionString);
-            command.Parameters.AddWithValue("@name", "Billie Eilish");
+            int artistId = GetArtistId(connection, artistName);
+            if (artistId == -1)
+            {
+                //Console.WriteLine($"Artist '{artistName}' not found.");
+                return;
+            }
+
+            // Retrieve the artist name
+            string artistNameToDelete = GetArtistName(connection, artistId);
 
             try
             {
-                int rowsAffected = command.ExecuteNonQuery();
-                //Console.WriteLine($"{rowsAffected} row(s) deleted.");
+                // First, delete associated songs from playlists
+                string deletePlaylistSongsQuery = "DELETE FROM dbo.PlaylistSong WHERE SongID IN (SELECT SongID FROM dbo.Song WHERE AlbumID IN (SELECT AlbumID FROM dbo.Album WHERE ArtistId = @artistId))";
+                using (SqlCommand deletePlaylistSongsCommand = new SqlCommand(deletePlaylistSongsQuery, connection))
+                {
+                    deletePlaylistSongsCommand.Parameters.AddWithValue("@artistId", artistId);
+                    int playlistSongsDeleted = deletePlaylistSongsCommand.ExecuteNonQuery();
+                    Console.WriteLine($"Playlist deleted: {playlistSongsDeleted}");
+                }
+
+                // Then, delete associated songs
+                string deleteSongsQuery = "DELETE FROM dbo.Song WHERE AlbumId IN (SELECT AlbumId FROM dbo.Album WHERE ArtistId = @artistId)";
+                using (SqlCommand deleteSongsCommand = new SqlCommand(deleteSongsQuery, connection))
+                {
+                    deleteSongsCommand.Parameters.AddWithValue("@artistId", artistId);
+                    int songsDeleted = deleteSongsCommand.ExecuteNonQuery();
+                    Console.WriteLine($"Songs deleted: {songsDeleted}");
+                }
+
+                // Next, delete associated albums
+                string deleteAlbumsQuery = "DELETE FROM dbo.Album WHERE ArtistId = @artistId";
+                using (SqlCommand deleteAlbumsCommand = new SqlCommand(deleteAlbumsQuery, connection))
+                {
+                    deleteAlbumsCommand.Parameters.AddWithValue("@artistId", artistId);
+                    int albumsDeleted = deleteAlbumsCommand.ExecuteNonQuery();
+                    Console.WriteLine($"Album deleted: {albumsDeleted}");
+                }
+
+                // Finally, delete the artist
+                string deleteArtistQuery = "DELETE FROM dbo.Artist WHERE ArtistId = @artistId";
+                using (SqlCommand deleteArtistCommand = new SqlCommand(deleteArtistQuery, connection))
+                {
+                    deleteArtistCommand.Parameters.AddWithValue("@artistId", artistId);
+                    int artistDeleted = deleteArtistCommand.ExecuteNonQuery();
+                    Console.WriteLine($"Artist '{artistNameToDelete}' deleted: {artistDeleted}");
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error deleting artist: {ex.Message}");
             }
         }
 
-        private static void PerformUpdateOperation(SqlConnection connectionString, String name, String description)
+        // Helper method to retrieve the artist name based on the artist ID
+        public string GetArtistName(SqlConnection connection, int artistId)
+        {
+            string query = "SELECT Name FROM dbo.Artist WHERE ArtistId = @artistId";
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@artistId", artistId);
+                try
+                {
+                    object result = command.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        return result.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error retrieving artist name: {ex.Message}");
+                }
+                return null; // Return null if the artist name is not found or an error occurs
+            }
+        }
+
+
+        // Helper method to retrieve the artistId based on the artistName
+        private static int GetArtistId(SqlConnection connection, string artistName)
+        {
+            string query = "SELECT ArtistId FROM dbo.Artist WHERE Name = @artistName";
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@artistName", artistName);
+                try
+                {
+                    object result = command.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        return Convert.ToInt32(result);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error retrieving artistId: {ex.Message}");
+                }
+                return -1; // Return -1 if artist is not found or an error occurs
+            }
+        }
+
+        public void PerformUpdateOperation(SqlConnection connection, string name, string description)
         {
             string updateQuery = "UPDATE dbo.Artist SET Description = @description WHERE Name = @name";
-            SqlCommand command = new SqlCommand(updateQuery, connectionString);
-            command.Parameters.AddWithValue("@description", "Goth-Pop");
-            command.Parameters.AddWithValue("@name", "Billie Eilish");
-            try
+            using (SqlCommand command = new SqlCommand(updateQuery, connection))
             {
-                int rowsAffected = command.ExecuteNonQuery();
-                //Console.WriteLine($"{rowsAffected} row(s) deleted.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+                command.Parameters.AddWithValue("@description", description);
+                command.Parameters.AddWithValue("@name", name);
+                try
+                {
+                    int rowsAffected = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
     }

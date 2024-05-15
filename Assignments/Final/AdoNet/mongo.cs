@@ -1,20 +1,17 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MongoDB.Bson.Serialization.Serializers;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace DBSpeedTest
 {
     partial class Program
     {
-        static void MongoMain(string[] args)
+        static void MonoMain(string[] args)
         {
             Stopwatch stopwatch = new Stopwatch();
             MongoDB mongoDB = new MongoDB();
@@ -23,8 +20,8 @@ namespace DBSpeedTest
             stopwatch.Start();
             int numRows = 1000000;
 
-            
-            // Example usage: Insert songs
+            Stopwatch insert = new Stopwatch();
+            insert.Start();
             for (int i = 0; i < numRows; i++)
             {
                 retrievedSong = new Song()
@@ -37,24 +34,30 @@ namespace DBSpeedTest
                     Album = "The Tortured Poets Department",
                 };
                 mongoDB.InsertSong(retrievedSong);
+                insert.Stop();
+                Console.WriteLine($"{numRows} song(s) inserted in {insert.ElapsedMilliseconds} ms.");
             }
-            Console.WriteLine($"{numRows} song(s) inserted.");
 
-
+            Stopwatch read = new Stopwatch();
+            read.Start();
             // Example usage: Get songs by their IDs
             ObjectId songId = mongoDB.GetSongOrPlaylistBy(retrievedSong.Id);
             for (int i = 0; i < numRows; i++)
             {
                 if (retrievedSong != null)
                 {
-                    Console.WriteLine($"Retrieved song is {retrievedSong.Title} by {retrievedSong.Artist}");
+                    Console.WriteLine($"Retrieved {numRows} song.");
                 }
                 else
                 {
                     Console.WriteLine($"Song with title 'Example Song {retrievedSong.Title}' was not found.");
                 }
             }
-            
+            Console.WriteLine($"{numRows} song was read in {read.ElapsedMilliseconds} ms.");
+            read.Stop();
+
+            Stopwatch update = new Stopwatch();
+            update.Start();
             // Example usage: Update songs
             for (int i = 0; i < numRows; i++)
             {
@@ -64,8 +67,11 @@ namespace DBSpeedTest
                     mongoDB.UpdateSong(retrievedSong.Id, retrievedSong);
                 }
             }
-            Console.WriteLine($"{numRows} song(s) updated.");
+            Console.WriteLine($"{numRows} song(s) updated in {update.ElapsedMilliseconds} ms.");
+            update.Stop();
 
+            Stopwatch remove = new Stopwatch();
+            remove.Start();
             // Example usage: Delete songs
             for (int i = 0; i < numRows; i++)
             {
@@ -74,7 +80,8 @@ namespace DBSpeedTest
                     mongoDB.DeleteSong(retrievedSong.Id);
                 }
             }
-            Console.WriteLine($"{numRows} song(s) deleted.");
+            Console.WriteLine($"{numRows} song(s) deleted in {remove.ElapsedMilliseconds} ms.");
+            remove.Stop();
 
             stopwatch.Stop();
             Console.WriteLine($"Time taken: {stopwatch.ElapsedMilliseconds} ms");
@@ -108,10 +115,10 @@ namespace DBSpeedTest
 
             if (song != null)
             {
-                Console.WriteLine($"{song.Title} was found from the {song.Album} album by {song.Artist}");
+                //Console.WriteLine($"{song.Title} was found from the {song.Album} album by {song.Artist}");
                 return song.Id;
             }
-else
+            else
             {
                 Console.WriteLine("Song not found.");
                 return ObjectId.Empty;

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DBSpeedTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c607684d3b51a912119eee51da50230906132d9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4215b9f10c9926695e1b6ff6834de60ae2fb05eb")]
 [assembly: System.Reflection.AssemblyProductAttribute("DBSpeedTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DBSpeedTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

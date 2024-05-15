@@ -7,11 +7,11 @@ namespace DBSpeedTest
 {
     partial class Program
     {
-        static void EntityMain(string[] args)
+        static void EMain(string[] args)
         {
             //EntityFramework.Execute(1);
-            //EntityFramework.Execute(1000);
-            EntityFramework.Execute(100000);
+            EntityFramework.Execute(1000);
+            //EntityFramework.Execute(100000);
             //EntityFramework.Execute(1000000);
         }
     }
@@ -26,7 +26,7 @@ namespace DBSpeedTest
                 stopwatch.Start();
 
                 // SQL Server connection string
-                using (var context = new ArtistContext())
+                using (var context = new ArtistContext()) 
                 {
                     for (int i = 0; i < numRows; i++)
                     {
@@ -38,14 +38,13 @@ namespace DBSpeedTest
                     Console.WriteLine($"{numRows} row(s) inserted.");
                     Console.WriteLine(stopwatch.Elapsed);
 
-
                     for (int i = 0; i < numRows; i++)
                     {
                         // Select
                         var selectArtist = context.Artists.ToList().FirstOrDefault(a => a.Name == $"Taylor Swift {i}");
                         if (selectArtist != null)
                         {
-                            Console.WriteLine($"Name: {selectArtist.Name}, Description: {selectArtist.Description}");
+                            //Console.WriteLine($"Name: {selectArtist.Name}, Description: {selectArtist.Description}");
                         }
                     }
                     Console.WriteLine($"Selected {numRows} row(s).");
@@ -57,7 +56,7 @@ namespace DBSpeedTest
                         var selectArtist = context.Artists.ToList().FirstOrDefault(a => a.Name == $"Taylor Swift {i}");
                         if (selectArtist != null)
                         {
-                            selectArtist.Description = $"Goth-Pop {i}";
+                            selectArtist.Description = $"Poetry Pop {i}";
                             context.SaveChanges();
                         }
                     }
