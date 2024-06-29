@@ -7,7 +7,7 @@ namespace DBSpeedTest
 {
     partial class Program
     {
-        static void Main(string[] args)
+        static void AMain(string[] args)
         {
             AdoNet adoNet = new AdoNet();
             string connectionString = @"Data Source=LAPTOP-CLDC7DLB\SQLEXPRESS;Initial Catalog=enchantedears;Integrated Security=true;";

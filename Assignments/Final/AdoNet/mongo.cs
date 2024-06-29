@@ -11,11 +11,12 @@ namespace DBSpeedTest
 {
     partial class Program
     {
-        static void MonoMain(string[] args)
+        static void Main(string[] args)
         {
             Stopwatch stopwatch = new Stopwatch();
             MongoDB mongoDB = new MongoDB();
             Song retrievedSong = null;
+            //Artist retrievedArtist = null;
 
             stopwatch.Start();
             int numRows = 1000000;
@@ -27,16 +28,25 @@ namespace DBSpeedTest
                 retrievedSong = new Song()
                 {
                     Title = "The Tortured Poets Department",
-                    Artist = "Taylor Swift",
+                    Artist = "Taylor Swift {i}",
                     Genre = "Pop",
                     ReleaseDate = DateTime.UtcNow.AddDays(i),
                     Duration = TimeSpan.FromMinutes(4),
                     Album = "The Tortured Poets Department",
                 };
+
+                /*
+                retrievedArtist = new Artist()
+                {
+                    Name = "Joe Jonas {i}",
+                    Description = "Pop",
+                };*/
+
                 mongoDB.InsertSong(retrievedSong);
                 insert.Stop();
-                Console.WriteLine($"{numRows} song(s) inserted in {insert.ElapsedMilliseconds} ms.");
             }
+            Console.WriteLine($"{numRows} song(s) inserted in {insert.ElapsedMilliseconds} ms.");
+
 
             Stopwatch read = new Stopwatch();
             read.Start();
@@ -44,9 +54,9 @@ namespace DBSpeedTest
             ObjectId songId = mongoDB.GetSongOrPlaylistBy(retrievedSong.Id);
             for (int i = 0; i < numRows; i++)
             {
-                if (retrievedSong != null)
+                if (retrievedSong != null && retrievedSong.Artist.Contains("Taylor Swift"))
                 {
-                    Console.WriteLine($"Retrieved {numRows} song.");
+                    //Console.WriteLine($"Retrieved {numRows} song.");
                 }
                 else
                 {
@@ -61,7 +71,7 @@ namespace DBSpeedTest
             // Example usage: Update songs
             for (int i = 0; i < numRows; i++)
             {
-                if (retrievedSong != null)
+                if (retrievedSong != null && retrievedSong.Artist.Contains("Taylor Swift"))
                 {
                     retrievedSong.Title = $"Updated Example Song {i}";
                     mongoDB.UpdateSong(retrievedSong.Id, retrievedSong);
@@ -75,7 +85,7 @@ namespace DBSpeedTest
             // Example usage: Delete songs
             for (int i = 0; i < numRows; i++)
             {
-                if (retrievedSong != null)
+                if (retrievedSong != null && retrievedSong.Artist.Contains("Taylor Swift"))
                 {
                     mongoDB.DeleteSong(retrievedSong.Id);
                 }
@@ -192,9 +202,9 @@ namespace DBSpeedTest
     {
         [BsonId]
         public ObjectId Id { get; set; }
+
         public string Name { get; set; }
         public string Description { get; set; }
         public List<ObjectId> Songs { get; set; }
     }
-
 }

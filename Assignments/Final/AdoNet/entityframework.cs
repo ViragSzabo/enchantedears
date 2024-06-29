@@ -7,12 +7,12 @@ namespace DBSpeedTest
 {
     partial class Program
     {
-        static void EMain(string[] args)
+        static void MMain(string[] args)
         {
             //EntityFramework.Execute(1);
-            EntityFramework.Execute(1000);
-            //EntityFramework.Execute(100000);
-            //EntityFramework.Execute(1000000);
+            //EntityFramework.Execute(1000);
+            //EntityFramework.Execute(10000);
+            EntityFramework.Execute(1000000);
         }
     }
 
@@ -25,60 +25,63 @@ namespace DBSpeedTest
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                // SQL Server connection string
-                using (var context = new ArtistContext()) 
+                using (var context = new ArtistContext())
                 {
-                    for (int i = 0; i < numRows; i++)
+                    // Insert
+                    for (int i = 0; i < numRows; i += 1000)
                     {
-                        // Insert
-                        var newArtistData = new Artist { Name = $"Taylor Swift {i}", Description = $"Pop {i}" };
-                        context.Artists.Add(newArtistData);
+                        for (int j = 0; j < 1000 && i + j < numRows; j++)
+                        {
+                            var newArtistData = new Artist { Name = $"Taylor Swift {i + j}", Description = $"Pop {i + j}" };
+                            context.Artists.Add(newArtistData);
+                        }
                         context.SaveChanges();
+                        context.Artists.Local.Clear(); // Clear the local cache to reduce memory usage
                     }
                     Console.WriteLine($"{numRows} row(s) inserted.");
-                    Console.WriteLine(stopwatch.Elapsed);
+                    Console.WriteLine($"Insert Time: {stopwatch.ElapsedMilliseconds} ms");
 
-                    for (int i = 0; i < numRows; i++)
+                    // Select
+                    for (int i = 0; i < numRows; i += 1000)
                     {
-                        // Select
-                        var selectArtist = context.Artists.ToList().FirstOrDefault(a => a.Name == $"Taylor Swift {i}");
-                        if (selectArtist != null)
-                        {
-                            //Console.WriteLine($"Name: {selectArtist.Name}, Description: {selectArtist.Description}");
-                        }
+                        var artistNames = Enumerable.Range(i, Math.Min(1000, numRows - i)).Select(j => $"Taylor Swift {j}");
+                        var selectArtists = context.Artists.Where(a => artistNames.Contains(a.Name)).ToList();
                     }
                     Console.WriteLine($"Selected {numRows} row(s).");
-                    Console.WriteLine(stopwatch.Elapsed);
+                    Console.WriteLine($"Select Time: {stopwatch.ElapsedMilliseconds} ms");
 
-                    for (int i = 0; i < numRows; i++)
+                    // Update
+                    for (int i = 0; i < numRows; i += 1000)
                     {
-                        // Update
-                        var selectArtist = context.Artists.ToList().FirstOrDefault(a => a.Name == $"Taylor Swift {i}");
-                        if (selectArtist != null)
+                        var artistNames = Enumerable.Range(i, Math.Min(1000, numRows - i)).Select(j => $"Taylor Swift {j}");
+                        var selectArtists = context.Artists.Where(a => artistNames.Contains(a.Name)).ToList();
+
+                        foreach (var selectArtist in selectArtists)
                         {
-                            selectArtist.Description = $"Poetry Pop {i}";
-                            context.SaveChanges();
+                            selectArtist.Description = $"Poetry Pop {selectArtist.Id}";
                         }
+                        context.SaveChanges();
+                        context.Artists.Local.Clear(); // Clear the local cache to reduce memory usage
                     }
                     Console.WriteLine($"Updated {numRows} row(s).");
-                    Console.WriteLine(stopwatch.Elapsed);
+                    Console.WriteLine($"Update Time: {stopwatch.ElapsedMilliseconds} ms");
 
-                    for (int i = 0; i < numRows; i++)
+                    // Delete
+                    for (int i = 0; i < numRows; i += 1000)
                     {
-                        // Delete
-                        var selectArtist = context.Artists.ToList().FirstOrDefault(a => a.Name == $"Taylor Swift {i}");
-                        if (selectArtist != null)
-                        {
-                            context.Artists.Remove(selectArtist);
-                            context.SaveChanges();
-                        }
+                        var artistNames = Enumerable.Range(i, Math.Min(1000, numRows - i)).Select(j => $"Taylor Swift {j}");
+                        var selectArtists = context.Artists.Where(a => artistNames.Contains(a.Name)).ToList();
+
+                        context.Artists.RemoveRange(selectArtists);
+                        context.SaveChanges();
+                        context.Artists.Local.Clear(); // Clear the local cache to reduce memory usage
                     }
                     Console.WriteLine($"{numRows} row(s) deleted.");
-                    Console.WriteLine(stopwatch.Elapsed);
+                    Console.WriteLine($"Delete Time: {stopwatch.ElapsedMilliseconds} ms");
                 }
 
                 stopwatch.Stop();
-                Console.WriteLine($"Time taken for {numRows} rows: {stopwatch.ElapsedMilliseconds} ms");
+                Console.WriteLine($"Total Time taken for {numRows} rows: {stopwatch.ElapsedMilliseconds} ms");
             }
             catch (Exception ex)
             {
