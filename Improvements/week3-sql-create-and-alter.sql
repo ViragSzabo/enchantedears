@@ -1,0 +1,25 @@
+CREATE TABLE dbo.Listening (
+	ListeningID INT PRIMARY KEY IDENTITY,
+	UserID INT FOREIGN KEY REFERENCES AppUser(UserID),
+	SongID INT FOREIGN KEY REFERENCES Song(SongID),
+	ListenDate DATE,
+	Duration INT
+);
+
+CREATE TABLE dbo.UserPreference (
+    PreferenceID INT PRIMARY KEY IDENTITY,
+    UserID INT FOREIGN KEY REFERENCES AppUser(UserID),
+    Genre NVARCHAR(100)
+);
+
+ALTER TABLE dbo.Song
+ADD Language NVARCHAR(50);
+
+ALTER TABLE dbo.AppUser
+ADD BirthDate DATE;
+
+ALTER TABLE dbo.AppUser
+ADD Country NVARCHAR(250);
+
+ALTER TABLE dbo.AppUser
+ADD PreferredGenre NVARCHAR(100);
